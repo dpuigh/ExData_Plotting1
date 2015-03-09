@@ -22,9 +22,10 @@ subData$TimeStamp <- strptime(
 
 # open graphics device
 png(filename="plot2.png", width=480, height=480, units="px")
-# create histogram with settings / annotations
+# create scatterplot with settings / annotations
 plot(subData$TimeStamp, subData$Global_active_power, 
      xlab="", ylab="Global Active Power (kilowatts)", type="n")
+# draw lines between points
 lines(subData$TimeStamp, subData$Global_active_power)
 # close graphics device
 dev.off()

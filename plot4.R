@@ -1,6 +1,6 @@
 # Exploratory Data Analysis
 # Course Project 1
-# R code creates plot of sub_metering vs time
+# R code creates four plots vs time
 
 # Get the data
 fileName <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
@@ -21,8 +21,19 @@ subData$TimeStamp <- strptime(
     paste(subData$Date,subData$Time,sep=" "), "%Y-%m-%d %H:%M:%S")
 
 # open graphics device
-png(filename="plot3.png", width=480, height=480, units="px")
+png(filename="plot4.png", width=480, height=480, units="px")
+par(mfrow = c(2,2))
 # create scatterplot with settings / annotations
+plot(subData$TimeStamp, subData$Global_active_power, 
+     xlab="", ylab="Global Active Power", type="n")
+# draw lines between points
+lines(subData$TimeStamp, subData$Global_active_power, col="black")
+
+plot(subData$TimeStamp, subData$Voltage, 
+     xlab="", ylab="Voltage", type="n", sub="datetime")
+# draw lines between points
+lines(subData$TimeStamp, subData$Voltage, col="black")
+
 plot(subData$TimeStamp, subData$Sub_metering_1, 
      xlab="", ylab="Energy sub metering", type="n")
 # draw lines between points
@@ -32,6 +43,14 @@ lines(subData$TimeStamp, subData$Sub_metering_3, col="blue")
 # add legend
 legend("topright", col=c("black","red","blue"), 
        legend = c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"),
-       lty=1, lwd=1, cex=0.93)
+       lty=1, lwd=1, cex=0.93, bty="n")
+
+plot(subData$TimeStamp, subData$Global_reactive_power, 
+     xlab="", ylab="Global_reactive_power", type="n", sub="datetime")
+# draw lines between points
+lines(subData$TimeStamp, subData$Global_reactive_power, col="black")
 # close graphics device
 dev.off()
+
+# set plotting back to default
+par(mfrow = c(1,1))
